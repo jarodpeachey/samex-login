@@ -12,7 +12,7 @@ console.log('Hostname: ', window.location.hostname);
 console.log('Pathname: ', window.location.pathname);
 console.log('Origin: ', window.location.origin);
 
-const REACT_APP_API = `${window.location.origin}/api/index.php`;
+const REACT_APP_API = `/Samex Login Form/api/index.php`;
 
 class Signup extends Component {
   static propTypes = {
@@ -81,7 +81,8 @@ class Signup extends Component {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-        'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        'Access-Control-Allow-Headers':
+          'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
       },
       data: this.state,
     })
@@ -164,7 +165,7 @@ class Signup extends Component {
           <div className="mt-xs">
             Already have an account?
             {' '}
-            <Link to={`${process.env.PUBLIC_URL}/login`}>Login</Link>
+            <Link to="/login">Login</Link>
           </div>
         </FormWrapper>
       </div>

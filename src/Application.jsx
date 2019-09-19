@@ -19,14 +19,10 @@ class Application extends Component {
 
   constructor (props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
-  componentDidMount () {
-
-  }
+  componentDidMount () {}
 
   render () {
     return (
@@ -35,15 +31,10 @@ class Application extends Component {
           <Switch>
             <Route
               exact
-              path={`${process.env.PUBLIC_URL}/`}
+              path="/Samex Login Form"
               render={props => (
                 <>
-                  {
-                    <Header
-                      {...props}
-                      pathname={location.pathname}
-                    />
-                  }
+                  {<Header {...props} pathname={location.pathname} />}
                   <Wrapper>
                     <Main {...props} />
                   </Wrapper>
@@ -52,15 +43,10 @@ class Application extends Component {
             />
             <Route
               exact
-              path={`${process.env.PUBLIC_URL}/signup`}
+              path="/Samex Login Form/signup"
               render={props => (
                 <>
-                  {
-                    <Header
-                      {...props}
-                      pathname={location.pathname}
-                    />
-                  }
+                  {<Header {...props} pathname={location.pathname} />}
                   <Wrapper>
                     <Signup {...props} />
                   </Wrapper>

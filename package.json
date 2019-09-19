@@ -2,7 +2,7 @@
   "name": "samex-login",
   "version": "1.0.0",
   "description": "",
-  "homepage": "http://localhost/Samex Login Form",
+  "homepage": "localhost/Samex Login Form",
   "engines": {
     "node": "10.15.1"
   },

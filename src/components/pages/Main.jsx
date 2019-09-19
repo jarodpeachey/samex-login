@@ -5,15 +5,11 @@ import Button from '@material-ui/core/Button';
 import { withRouter, Link } from 'react-router-dom';
 
 class Main extends Component {
-  static propTypes = {
-
-  };
+  static propTypes = {};
 
   constructor (props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render () {
@@ -24,12 +20,8 @@ class Main extends Component {
           <SubTitle>Samex is awesome. Sign up today.</SubTitle>
         </div>
         <ButtonContainer>
-          <Link to={`${process.env.PUBLIC_URL}/signup`}>
-            <Button
-              color="primary"
-              variant="contained"
-              className="mx-none"
-            >
+          <Link to="/signup">
+            <Button color="primary" variant="contained" className="mx-none">
               Sign Up
             </Button>
           </Link>
@@ -74,4 +66,3 @@ const ButtonContainer = styled.div`
 `;
 
 export default withRouter(Main);
-

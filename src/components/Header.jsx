@@ -10,9 +10,7 @@ class Header extends Component {
 
   constructor (props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   componentDidMount () {}
@@ -31,9 +29,9 @@ class Header extends Component {
           <Wrapper>
             <div className="container py-xxs">
               <MobileRow>
-                  <Link to={`${process.env.PUBLIC_URL}/`}>
-                    <BrandName className="m-none">Samex</BrandName>
-                  </Link>
+                <Link to="/">
+                  <BrandName className="m-none">Samex</BrandName>
+                </Link>
               </MobileRow>
             </div>
           </Wrapper>
@@ -42,21 +40,17 @@ class Header extends Component {
             <div className="container py-xxs">
               <Row>
                 <ColumnOne>
-                  <Link to={`${process.env.PUBLIC_URL}/`}>
+                  <Link to="/">
                     <BrandName className="m-none">Samex</BrandName>
                   </Link>
                 </ColumnOne>
                 <ColumnTwo>
                   <CustomMenu className="menu">
                     <CustomMenuItem className="menu-item">
-                      <Link to={`${process.env.PUBLIC_URL}/signup`}>
-                        Signup
-                      </Link>
+                      <Link to="/signup">Signup</Link>
                     </CustomMenuItem>
                     <CustomMenuItem className="menu-item">
-                      <Link to={`${process.env.PUBLIC_URL}/login`}>
-                        Login
-                      </Link>
+                      <Link to="/login">Login</Link>
                     </CustomMenuItem>
                   </CustomMenu>
                 </ColumnTwo>
@@ -64,7 +58,6 @@ class Header extends Component {
             </div>
           </Wrapper>
         )}
-
       </span>
     );
   }
