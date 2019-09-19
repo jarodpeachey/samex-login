@@ -6,13 +6,18 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import axios from 'axios';
-// import {} from '../../../api/post_receive.php';
+// import {} from '../../../api/index.php';
 
 console.log('Hostname: ', window.location.hostname);
 console.log('Pathname: ', window.location.pathname);
 console.log('Origin: ', window.location.origin);
+console.log('Host: ', window.location.host);
+console.log('Protocol: ', window.location.protocol);
+console.log('PUBLIC_URL: ', process.env.NODE_ENV);
 
-const REACT_APP_API = `/Samex Login Form/api/index.php`;
+const nodeEnv = process.env.NODE_ENV;
+
+const REACT_APP_API = '/samex-login/api/index.php';
 
 class Signup extends Component {
   static propTypes = {
@@ -74,24 +79,31 @@ class Signup extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    axios({
-      method: 'post',
-      url: `${REACT_APP_API}`,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-        'Access-Control-Allow-Headers':
-          'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-      },
-      data: this.state,
-    })
-      .then(() => {
-        console.log('Sent!');
+
+    if (nodeEnv === 'development') {
+      alert(
+        'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
+      );
+    } else {
+      axios({
+        method: 'post',
+        url: `${REACT_APP_API}`,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
+          'Access-Control-Allow-Headers':
+            'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+        },
+        data: this.state,
       })
-      .catch(() => {
-        console.log('Error.');
-      });
+        .then(() => {
+          console.log('Sent!');
+        })
+        .catch(() => {
+          console.log('Error.');
+        });
+    }
   };
 
   render () {

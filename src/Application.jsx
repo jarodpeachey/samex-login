@@ -31,7 +31,7 @@ class Application extends Component {
           <Switch>
             <Route
               exact
-              path="/Samex Login Form"
+              path={'/' || '/samex-login'}
               render={props => (
                 <>
                   {<Header {...props} pathname={location.pathname} />}
@@ -43,7 +43,55 @@ class Application extends Component {
             />
             <Route
               exact
-              path="/Samex Login Form/signup"
+              path={'/signup' || '/samex-login/signup'}
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Signup {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Main {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Signup {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
+              path="/samex-login"
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Main {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
+              path="/samex-login/signup"
               render={props => (
                 <>
                   {<Header {...props} pathname={location.pathname} />}

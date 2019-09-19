@@ -9,13 +9,13 @@ import Application from './Application';
 // import { persistor, store } from './Store';
 
 const history = createBrowserHistory({
-  // forceRefresh: true,
+  basename: process.env.PUBLIC_URL,
 });
 
 const renderApp = () => {
   ReactDOM.render(
     <>
-      <Router history={history} basename="/Samex Login Form">
+      <Router history={history} basename={process.env.PUBLIC_URL}>
         <Route render={props => <Application {...props} />} />
       </Router>
     </>,
