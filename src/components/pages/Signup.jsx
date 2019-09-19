@@ -32,6 +32,7 @@ class Signup extends Component {
       confirmEmailValue: undefined,
       passwordValue: undefined,
       confirmValue: undefined,
+      nameError: false,
     };
     this.onNameInputChange = this.onNameInputChange.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -53,12 +54,23 @@ class Signup extends Component {
     });
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate (nextState) {
+    if (this.state.nameError !== nextState.nameError) {
+      return true;
+    }
     return false;
   }
 
   onNameInputChange (e) {
+    const regex = /^[a-z]{2,9}$/;
+    const stringToTest = e.target.value;
     this.setState({ nameValue: e.target.value });
+
+    if (!regex.test(stringToTest)) {
+      this.setState({ nameError: true });
+    } else {
+      this.setState({ nameError: false });
+    }
   }
 
   onEmailInputChange (e) {
@@ -108,6 +120,7 @@ class Signup extends Component {
 
   render () {
     const { classes } = this.props;
+    const { nameError } = this.state;
 
     return (
       <div>
@@ -122,8 +135,14 @@ class Signup extends Component {
               variant="outlined"
               margin="dense"
               label="Name"
+              error={nameError}
               onChange={this.onNameInputChange}
             />
+            {nameError ? (
+              <ErrorMessage>
+                Please enter a name between 1 and 9 characters
+              </ErrorMessage>
+            ) : null}
             <TextField
               // id="email"
               type="email"
@@ -205,6 +224,15 @@ const FormWrapper = styled.div`
 const Heading = styled.h1`
   text-align: center;
   color: ${({ theme }) => theme.colors.main};
+`;
+
+const ErrorMessage = styled.div`
+  width: 100%;
+  color: #FF6327;
+  border-radius: 2px;
+  border: none;
+  font-size: 14px;
+  margin: -8px 0 ${({ theme }) => theme.spacing.sm} 0;
 `;
 
 export default withStyles(styles)(Signup);

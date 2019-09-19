@@ -40,8 +40,12 @@
   border-width: 1.5px !important;
 }
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #158EE1 !important;
+}
+
+form .Mui-error fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: #FF6347 !important;
 }
 
 body {
