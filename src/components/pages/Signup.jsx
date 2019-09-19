@@ -29,10 +29,14 @@ class Signup extends Component {
     this.state = {
       nameValue: undefined,
       emailValue: undefined,
-      confirmEmailValue: undefined,
+      emailConfirmValue: undefined,
       passwordValue: undefined,
-      confirmValue: undefined,
+      passwordConfirmValue: undefined,
       nameError: false,
+      emailError: false,
+      emailConfirmError: false,
+      passwordError: false,
+      passwordConfirmError: false,
     };
     this.onNameInputChange = this.onNameInputChange.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -62,7 +66,7 @@ class Signup extends Component {
   }
 
   onNameInputChange (e) {
-    const regex = /^[a-z]{2,9}$/;
+    const regex = /^[a-z]{1,9}$/;
     const stringToTest = e.target.value;
     this.setState({ nameValue: e.target.value });
 
@@ -74,19 +78,53 @@ class Signup extends Component {
   }
 
   onEmailInputChange (e) {
-    this.setState({ userNameValue: e.target.value });
+    const regex = /[^<>()[\]\\,;:%#^\s@"$&!@]+@(samex)\.[a-z]{2,3}/;
+    const stringToTest = e.target.value;
+    this.setState({ emailValue: e.target.value });
+
+    console.log('Email regex: ', regex.test(stringToTest));
+
+    if (!regex.test(stringToTest)) {
+      this.setState({ emailError: true });
+    } else {
+      this.setState({ emailError: false });
+    }
   }
 
   onEmailConfirmInputChange (e) {
+    const regex = /[^<>()[\]\\,;:%#^\s@"$&!@]+@(samex)\.[a-z]{2,3}/;
+    const stringToTest = e.target.value;
     this.setState({ emailConfirmValue: e.target.value });
+
+    if (!regex.test(stringToTest) || e.target.value !== this.state.emailValue) {
+      this.setState({ emailConfirmError: true });
+    } else {
+      this.setState({ emailConfirmError: false });
+    }
   }
 
   onPasswordInputChange (e) {
+    const regex = /.+/;
+    const stringToTest = e.target.value;
     this.setState({ passwordValue: e.target.value });
+
+    if (!regex.test(stringToTest)) {
+      this.setState({ passwordError: true });
+    } else {
+      this.setState({ passwordError: false });
+    }
   }
 
   onPasswordConfirmInputChange (e) {
-    this.setState({ confirmValue: e.target.value });
+    const regex = /.+/;
+    const stringToTest = e.target.value;
+    this.setState({ passwordConfirmValue: e.target.value });
+
+    if (!regex.test(stringToTest)) {
+      this.setState({ passwordConfirmError: true });
+    } else {
+      this.setState({ passwordConfirmError: false });
+    }
   }
 
   onFormSubmit = (e) => {
@@ -120,7 +158,7 @@ class Signup extends Component {
 
   render () {
     const { classes } = this.props;
-    const { nameError } = this.state;
+    const { nameError, emailError, emailConfirmError, passwordError, passwordConfirmError } = this.state;
 
     return (
       <div>
@@ -151,8 +189,14 @@ class Signup extends Component {
               variant="outlined"
               margin="dense"
               label="Email"
+              error={emailError}
               onChange={this.onEmailInputChange}
             />
+            {emailError ? (
+              <ErrorMessage>
+                Please enter a valid email including the infix @samex
+              </ErrorMessage>
+            ) : null}
             <TextField
               id="email-confirm"
               type="email"
@@ -161,6 +205,7 @@ class Signup extends Component {
               variant="outlined"
               margin="dense"
               label="Confirm Email"
+              error={emailConfirmError}
               onChange={this.onConfirmEmailInputChange}
             />
             <TextField
@@ -171,6 +216,7 @@ class Signup extends Component {
               variant="outlined"
               margin="dense"
               label="Password"
+              error={passwordError}
               onChange={this.onPasswordInputChange}
             />
             <TextField
@@ -181,6 +227,7 @@ class Signup extends Component {
               variant="outlined"
               margin="dense"
               label="Confirm Password"
+              error={passwordConfirmError}
               onChange={this.onPasswordConfirmInputChange}
             />
             <Button
@@ -228,7 +275,7 @@ const Heading = styled.h1`
 
 const ErrorMessage = styled.div`
   width: 100%;
-  color: #FF6327;
+  color: #ff6327;
   border-radius: 2px;
   border: none;
   font-size: 14px;
