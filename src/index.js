@@ -15,20 +15,9 @@ const history = createBrowserHistory({
 const renderApp = () => {
   ReactDOM.render(
     <>
-      {/* <Provider store={store}> */}
-        {/* <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}> */}
-          <Router history={history}>
-            <Route
-              render={props => (
-                <Application
-                  {...props}
-                />
-              )}
-            />
-          </Router>
-          {/* <Application /> */}
-        {/* </PersistGate> */}
-      {/* </Provider> */}
+      <Router history={history} basename="/Samex Login Form">
+        <Route render={props => <Application {...props} />} />
+      </Router>
     </>,
     document.getElementById('app'),
   );

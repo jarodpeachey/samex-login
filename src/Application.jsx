@@ -35,7 +35,7 @@ class Application extends Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path={`${process.env.PUBLIC_URL}/`}
               render={props => (
                 <>
                   {
@@ -52,7 +52,7 @@ class Application extends Component {
             />
             <Route
               exact
-              path="/signup"
+              path={`${process.env.PUBLIC_URL}/signup`}
               render={props => (
                 <>
                   {

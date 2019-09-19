@@ -24,7 +24,7 @@ class Main extends Component {
           <SubTitle>Samex is awesome. Sign up today.</SubTitle>
         </div>
         <ButtonContainer>
-          <Link to="/signup">
+          <Link to={`${process.env.PUBLIC_URL}/signup`}>
             <Button
               color="primary"
               variant="contained"

@@ -164,7 +164,7 @@ class Signup extends Component {
           <div className="mt-xs">
             Already have an account?
             {' '}
-            <Link to="/login">Login</Link>
+            <Link to={`${process.env.PUBLIC_URL}/login`}>Login</Link>
           </div>
         </FormWrapper>
       </div>

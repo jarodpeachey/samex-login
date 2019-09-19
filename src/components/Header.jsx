@@ -31,7 +31,7 @@ class Header extends Component {
           <Wrapper>
             <div className="container py-xxs">
               <MobileRow>
-                  <Link to="/">
+                  <Link to={`${process.env.PUBLIC_URL}/`}>
                     <BrandName className="m-none">Samex</BrandName>
                   </Link>
               </MobileRow>
@@ -42,19 +42,19 @@ class Header extends Component {
             <div className="container py-xxs">
               <Row>
                 <ColumnOne>
-                  <Link to="/">
+                  <Link to={`${process.env.PUBLIC_URL}/`}>
                     <BrandName className="m-none">Samex</BrandName>
                   </Link>
                 </ColumnOne>
                 <ColumnTwo>
                   <CustomMenu className="menu">
                     <CustomMenuItem className="menu-item">
-                      <Link to="/signup">
+                      <Link to={`${process.env.PUBLIC_URL}/signup`}>
                         Signup
                       </Link>
                     </CustomMenuItem>
                     <CustomMenuItem className="menu-item">
-                      <Link to="/login">
+                      <Link to={`${process.env.PUBLIC_URL}/login`}>
                         Login
                       </Link>
                     </CustomMenuItem>
