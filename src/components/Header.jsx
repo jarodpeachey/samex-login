@@ -27,31 +27,44 @@ class Header extends Component {
   render () {
     return (
       <span>
-        <Wrapper>
-          <div className="container py-xxs">
-            <Row>
-              <ColumnOne>
-                <Link to="/">
-                  <BrandName className="m-none">App</BrandName>
-                </Link>
-              </ColumnOne>
-              <ColumnTwo>
-                <CustomMenu className="menu">
-                  <CustomMenuItem className="menu-item">
-                    <Link to="/">
-                      Menu Item 1
-                    </Link>
-                  </CustomMenuItem>
-                  <CustomMenuItem className="menu-item">
-                    <Link to="/">
-                      Menu Item 2
-                    </Link>
-                  </CustomMenuItem>
-                </CustomMenu>
-              </ColumnTwo>
-            </Row>
-          </div>
-        </Wrapper>
+        {location.pathname === '/signup' ? (
+          <Wrapper>
+            <div className="container py-xxs">
+              <MobileRow>
+                  <Link to="/">
+                    <BrandName className="m-none">Samex</BrandName>
+                  </Link>
+              </MobileRow>
+            </div>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <div className="container py-xxs">
+              <Row>
+                <ColumnOne>
+                  <Link to="/">
+                    <BrandName className="m-none">Samex</BrandName>
+                  </Link>
+                </ColumnOne>
+                <ColumnTwo>
+                  <CustomMenu className="menu">
+                    <CustomMenuItem className="menu-item">
+                      <Link to="/signup">
+                        Signup
+                      </Link>
+                    </CustomMenuItem>
+                    <CustomMenuItem className="menu-item">
+                      <Link to="/login">
+                        Login
+                      </Link>
+                    </CustomMenuItem>
+                  </CustomMenu>
+                </ColumnTwo>
+              </Row>
+            </div>
+          </Wrapper>
+        )}
+
       </span>
     );
   }
@@ -88,6 +101,12 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const MobileRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ColumnOne = styled.div`

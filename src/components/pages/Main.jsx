@@ -20,8 +20,8 @@ class Main extends Component {
     return (
       <Wrapper>
         <div className="container py-none">
-          <Title>App</Title>
-          <SubTitle>App is an awesome app. Try it out today.</SubTitle>
+          <Title>Samex</Title>
+          <SubTitle>Samex is awesome. Sign up today.</SubTitle>
         </div>
         <ButtonContainer>
           <Link to="/signup">
@@ -30,7 +30,7 @@ class Main extends Component {
               variant="contained"
               className="mx-none"
             >
-              Try It
+              Sign Up
             </Button>
           </Link>
         </ButtonContainer>

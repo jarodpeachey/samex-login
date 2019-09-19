@@ -2,11 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
-import { PersistGate } from 'redux-persist/lib/integration/react';
+// import { PersistGate } from 'redux-persist/lib/integration/react';
 import Application from './Application';
-import { persistor, store } from './Store';
+// import { persistor, store } from './Store';
 
 const history = createBrowserHistory({
   // forceRefresh: true,
@@ -15,8 +15,8 @@ const history = createBrowserHistory({
 const renderApp = () => {
   ReactDOM.render(
     <>
-      <Provider store={store}>
-        <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
+      {/* <Provider store={store}> */}
+        {/* <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}> */}
           <Router history={history}>
             <Route
               render={props => (
@@ -27,8 +27,8 @@ const renderApp = () => {
             />
           </Router>
           {/* <Application /> */}
-        </PersistGate>
-      </Provider>
+        {/* </PersistGate> */}
+      {/* </Provider> */}
     </>,
     document.getElementById('app'),
   );

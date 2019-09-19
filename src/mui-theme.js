@@ -6,6 +6,17 @@ const overrides = {
       userSelect: 'none',
       outline: 'none',
       margin: '8px',
+      boxShadow: 'none !important',
+      borderRadius: 2,
+    },
+  },
+  MuiInputBase: {
+    input: {
+      background: '#f7f7f7 !important',
+      padding: '12px !important',
+    },
+    root: {
+      margin: '0 0 10px 0',
     },
   },
 };

@@ -34,6 +34,16 @@
   color: white !important;
 }
 
+.MuiOutlinedInput-notchedOutline  {
+  border-color: transparent !important;
+  border-radius: 2px !important;
+  border-width: 1.5px !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #158EE1 !important;
+}
+
 body {
   width: 100%;
   overflow-x: hidden;

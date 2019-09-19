@@ -1,5 +1,3 @@
-import axios from 'axios';
-import 'babel-polyfill';
 import {
   GET_DATA,
 } from './types';
