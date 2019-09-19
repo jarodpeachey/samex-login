@@ -10,8 +10,9 @@ import axios from 'axios';
 
 console.log('Hostname: ', window.location.hostname);
 console.log('Pathname: ', window.location.pathname);
+console.log('Origin: ', window.location.origin);
 
-const REACT_APP_API = 'http://localhost/Samex Login Form/api/index.php';
+const REACT_APP_API = `${window.location.origin}/api/index.php`;
 
 class Signup extends Component {
   static propTypes = {
