@@ -66,11 +66,11 @@ class Signup extends Component {
   }
 
   onNameInputChange (e) {
-    const regex = /^[a-z]{1,9}$/;
+    const regex = /^[a-zA-Z\s]{1,9}$/;
     const stringToTest = e.target.value;
     this.setState({ nameValue: e.target.value });
 
-    if (!regex.test(stringToTest)) {
+    if (!regex.test(stringToTest) && e.target.value !== '') {
       this.setState({ nameError: true });
     } else {
       this.setState({ nameError: false });
@@ -84,7 +84,7 @@ class Signup extends Component {
 
     console.log('Email regex: ', regex.test(stringToTest));
 
-    if (!regex.test(stringToTest)) {
+    if (!regex.test(stringToTest) && e.target.value !== '') {
       this.setState({ emailError: true });
     } else {
       this.setState({ emailError: false });
@@ -96,7 +96,10 @@ class Signup extends Component {
     const stringToTest = e.target.value;
     this.setState({ emailConfirmValue: e.target.value });
 
-    if (!regex.test(stringToTest) || e.target.value !== this.state.emailValue) {
+    if (
+      (!regex.test(stringToTest) || e.target.value !== this.state.emailValue) &&
+      e.target.value !== ''
+    ) {
       this.setState({ emailConfirmError: true });
     } else {
       this.setState({ emailConfirmError: false });
@@ -104,11 +107,14 @@ class Signup extends Component {
   }
 
   onPasswordInputChange (e) {
-    const regex = /.+/;
+    const regexComplete = /^(?=.*[A-Z])(?=.*\d.*\d)[^\s]{8,15}\$$/;
+    // const regexOneNumber = /^(?=.*[A-Z])(?=.*\d.*)[^\s]{8,15}\$$/;
+    // const regexNoCharacterLimit = /^(?=.*[A-Z])(?=.*\d.*)[^\s]*\$$/;
+
     const stringToTest = e.target.value;
     this.setState({ passwordValue: e.target.value });
 
-    if (!regex.test(stringToTest)) {
+    if (!regexComplete.test(stringToTest) && e.target.value !== '') {
       this.setState({ passwordError: true });
     } else {
       this.setState({ passwordError: false });
@@ -116,11 +122,15 @@ class Signup extends Component {
   }
 
   onPasswordConfirmInputChange (e) {
-    const regex = /.+/;
+    const regex = /^.{8,14}\${1}$/;
     const stringToTest = e.target.value;
     this.setState({ passwordConfirmValue: e.target.value });
 
-    if (!regex.test(stringToTest)) {
+    if (
+      (!regex.test(stringToTest) ||
+        e.target.value !== this.state.passwordValue) &&
+      e.target.value !== ''
+    ) {
       this.setState({ passwordConfirmError: true });
     } else {
       this.setState({ passwordConfirmError: false });
@@ -130,35 +140,56 @@ class Signup extends Component {
   onFormSubmit = (e) => {
     e.preventDefault();
 
-    if (nodeEnv === 'development') {
-      alert(
-        'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
-      );
-    } else {
-      axios({
-        method: 'post',
-        url: `${REACT_APP_API}`,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-          'Access-Control-Allow-Headers':
-            'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-        },
-        data: this.state,
-      })
-        .then(() => {
-          console.log('Sent!');
+    if (
+      !this.state.nameError &&
+      !this.state.emailError &&
+      !this.state.emailConfirmError &&
+      !this.state.passwordError &&
+      !this.state.passwordConfirmError &&
+      !this.state.nameValue === '' &&
+      !this.state.emailValue === '' &&
+      !this.state.emailConfirmValue === '' &&
+      !this.state.passwordValue === '' &&
+      !this.state.passwordConfirmValue === ''
+    ) {
+      if (nodeEnv === 'development') {
+        alert(
+          'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
+        );
+      } else {
+        axios({
+          method: 'post',
+          url: `${REACT_APP_API}`,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
+            'Access-Control-Allow-Headers':
+              'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          },
+          data: this.state,
         })
-        .catch(() => {
-          console.log('Error.');
-        });
+          .then(() => {
+            console.log('Sent!');
+          })
+          .catch(() => {
+            console.log('Error.');
+          });
+      }
+    } else {
+      alert('Please fix the errors');
     }
   };
 
   render () {
     const { classes } = this.props;
-    const { nameError, emailError, emailConfirmError, passwordError, passwordConfirmError } = this.state;
+    const {
+      nameError,
+      emailError,
+      emailConfirmError,
+      passwordError,
+      passwordConfirmError,
+    } = this.state;
 
     return (
       <div>
@@ -206,8 +237,11 @@ class Signup extends Component {
               margin="dense"
               label="Confirm Email"
               error={emailConfirmError}
-              onChange={this.onConfirmEmailInputChange}
+              onChange={this.onEmailConfirmInputChange}
             />
+            {emailConfirmError ? (
+              <ErrorMessage>Your emails do not match</ErrorMessage>
+            ) : null}
             <TextField
               id="password"
               type="password"
@@ -219,6 +253,17 @@ class Signup extends Component {
               error={passwordError}
               onChange={this.onPasswordInputChange}
             />
+            {passwordError ? (
+              <ErrorMessage>
+                Your password must:
+                <ErrorList>
+                  <li>Contain at least 1 uppercase letter</li>
+                  <li>Contain at least 2 numbers</li>
+                  <li>End with a $</li>
+                  <li>Be between 8 and 16 characters long</li>
+                </ErrorList>
+              </ErrorMessage>
+            ) : null}
             <TextField
               id="password-confirm"
               type="password"
@@ -230,6 +275,9 @@ class Signup extends Component {
               error={passwordConfirmError}
               onChange={this.onPasswordConfirmInputChange}
             />
+            {passwordConfirmError ? (
+              <ErrorMessage>Your passwords do not match</ErrorMessage>
+            ) : null}
             <Button
               type="submit"
               color="primary"
@@ -280,6 +328,11 @@ const ErrorMessage = styled.div`
   border: none;
   font-size: 14px;
   margin: -8px 0 ${({ theme }) => theme.spacing.sm} 0;
+`;
+
+const ErrorList = styled.ul`
+  margin-top: 12px;
+  margin-left: ${({ theme }) => theme.spacing.md};
 `;
 
 export default withStyles(styles)(Signup);
