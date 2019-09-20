@@ -17,7 +17,7 @@ console.log('PUBLIC_URL: ', process.env.NODE_ENV);
 
 const nodeEnv = process.env.NODE_ENV;
 
-const REACT_APP_API = '/samex-login/api/index.php';
+const REACT_APP_API = '/samex-login/api/users/create.php';
 
 class Signup extends Component {
   static propTypes = {
@@ -27,11 +27,11 @@ class Signup extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      nameValue: undefined,
-      emailValue: undefined,
-      emailConfirmValue: undefined,
-      passwordValue: undefined,
-      passwordConfirmValue: undefined,
+      nameValue: '',
+      emailValue: '',
+      emailConfirmValue: '',
+      passwordValue: '',
+      passwordConfirmValue: '',
       nameError: false,
       emailError: false,
       emailConfirmError: false,
@@ -139,17 +139,20 @@ class Signup extends Component {
     e.preventDefault();
 
     if (
-      !this.state.nameError &&
-      !this.state.emailError &&
-      !this.state.emailConfirmError &&
-      !this.state.passwordError &&
-      !this.state.passwordConfirmError &&
-      !this.state.nameValue === '' &&
-      !this.state.emailValue === '' &&
-      !this.state.emailConfirmValue === '' &&
-      !this.state.passwordValue === '' &&
-      !this.state.passwordConfirmValue === ''
+      this.state.nameError ||
+      this.state.emailError ||
+      this.state.emailConfirmError ||
+      this.state.passwordError ||
+      this.state.passwordConfirmError ||
+      this.state.nameValue === '' ||
+      this.state.emailValue === '' ||
+      this.state.emailConfirmValue === '' ||
+      this.state.passwordValue === '' ||
+      this.state.passwordConfirmValue === ''
     ) {
+      alert('Please fix the errors');
+    } else {
+      console.log('Fields match.');
       if (nodeEnv === 'development') {
         alert(
           'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
@@ -163,7 +166,7 @@ class Signup extends Component {
             'Access-Control-Allow-Credentials': 'true',
             'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
             'Access-Control-Allow-Headers':
-              'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+                'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
           },
           data: this.state,
         })
@@ -174,9 +177,9 @@ class Signup extends Component {
             console.log('Error.');
           });
       }
-    } else {
-      alert('Please fix the errors');
     }
+
+
   };
 
   render () {
