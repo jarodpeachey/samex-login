@@ -107,9 +107,7 @@ class Signup extends Component {
   }
 
   onPasswordInputChange (e) {
-    const regexComplete = /^(?=.*[A-Z])(?=.*\d.*\d)[^\s]{8,15}\$$/;
-    // const regexOneNumber = /^(?=.*[A-Z])(?=.*\d.*)[^\s]{8,15}\$$/;
-    // const regexNoCharacterLimit = /^(?=.*[A-Z])(?=.*\d.*)[^\s]*\$$/;
+    const regexComplete = /^(?=.*[A-Z])(?=.*\d.*\d)[^\s]{9,15}\$$/;
 
     const stringToTest = e.target.value;
     this.setState({ passwordValue: e.target.value });
