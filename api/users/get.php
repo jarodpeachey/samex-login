@@ -5,8 +5,8 @@
   $api = new Database();
 
   switch($requestMethod) {
-    case 'POST':
-      $api->insertUser($_POST);
+    case 'GET':
+      $api->insertUser($_GET);
       break;
     default:
       header("HTTP/1.0 405 Method Not Allowed");

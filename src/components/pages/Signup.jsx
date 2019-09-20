@@ -17,7 +17,7 @@ console.log('PUBLIC_URL: ', process.env.NODE_ENV);
 
 const nodeEnv = process.env.NODE_ENV;
 
-const REACT_APP_API = '/samex-login/api/users/create.php';
+const REACT_APP_API = 'http://localhost/samex-login/api/users';
 
 class Signup extends Component {
   static propTypes = {
@@ -135,7 +135,7 @@ class Signup extends Component {
     }
   }
 
-  onFormSubmit = (e) => {
+  onFormSubmit (e) {
     e.preventDefault();
 
     if (
@@ -150,36 +150,29 @@ class Signup extends Component {
       this.state.passwordValue === '' ||
       this.state.passwordConfirmValue === ''
     ) {
-      alert('Please fix the errors');
+      alert('Please use a different email');
     } else {
-      console.log('Fields match.');
-      if (nodeEnv === 'development') {
-        alert(
-          'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
-        );
-      } else {
-        const bodyFormData = new FormData();
-        bodyFormData.set('name', this.state.nameValue);
-        bodyFormData.set('email', this.state.emailValue);
-        bodyFormData.set('password', this.state.passwordValue);
+      const bodyFormData = new FormData();
+      bodyFormData.set('name', this.state.nameValue);
+      bodyFormData.set('email', this.state.emailValue);
+      bodyFormData.set('password', this.state.passwordValue);
 
-        axios({
-          method: 'POST',
-          url: `${REACT_APP_API}`,
-          config: {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          },
-          data: bodyFormData,
+      axios({
+        method: 'POST',
+        url: `${REACT_APP_API}/create.php`,
+        config: {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        },
+        data: bodyFormData,
+      })
+        .then((postRes) => {
+          console.log('Sent! Response: ', postRes);
         })
-          .then((res) => {
-            console.log('Sent! Response: ', res);
-          })
-          .catch(() => {
-            console.log('Error.');
-          });
-      }
+        .catch(() => {
+          console.log('Error.');
+        });
     }
-  };
+  }
 
   render () {
     const { classes } = this.props;
