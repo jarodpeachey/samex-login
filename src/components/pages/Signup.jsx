@@ -158,28 +158,27 @@ class Signup extends Component {
           'We are not able to reach the api. Please use a development server for PHP, with MAMP, WAMP, XAMPP or AMPPS',
         );
       } else {
+        const bodyFormData = new FormData();
+        bodyFormData.set('name', this.state.nameValue);
+        bodyFormData.set('email', this.state.emailValue);
+        bodyFormData.set('password', this.state.passwordValue);
+
         axios({
-          method: 'post',
+          method: 'POST',
           url: `${REACT_APP_API}`,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS, POST, PUT',
-            'Access-Control-Allow-Headers':
-                'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+          config: {
+            headers: { 'Content-Type': 'multipart/form-data' },
           },
-          data: this.state,
+          data: bodyFormData,
         })
-          .then(() => {
-            console.log('Sent!');
+          .then((res) => {
+            console.log('Sent! Response: ', res);
           })
           .catch(() => {
             console.log('Error.');
           });
       }
     }
-
-
   };
 
   render () {

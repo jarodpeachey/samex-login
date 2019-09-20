@@ -46,9 +46,11 @@
 
   switch($requestMethod) {
     case 'POST':
+      echo('Post Name: ' . $_POST['name']);
       $api->insertUser($_POST);
       break;
     default:
+      echo ("Not allowed: " . $_POST['name']);
       header("HTTP/1.0 405 Method Not Allowed");
       break;
   }
