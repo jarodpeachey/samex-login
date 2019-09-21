@@ -37,7 +37,7 @@ html {
 
 body {
   height: 100% !important;
-  background: #ce0a0a;
+  background: #f7f7f7;
 }
 
 #app {
@@ -47,7 +47,7 @@ body {
 .container {
   margin: 0 auto;
   width: 95%;
-  padding: 5rem 0;
+  padding: 0;
 }
 
 @media (min-width: 540px) {
@@ -81,4 +81,28 @@ body {
     width: 85%;
     max-width: 1200px;
   }
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0;
+}
+
+.menu-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  position: relative;
+}
+
+.menu-item > a {
+  padding: 15px;
+  line-height: 100%;
+  box-shadow: none;
+  color: inherit;
+  width: 100%;
 }

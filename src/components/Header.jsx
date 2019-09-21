@@ -27,7 +27,7 @@ class Header extends Component {
       <span>
         {location.pathname === '/signup' ? (
           <Wrapper>
-            <div className="container py-xxs">
+            <div className="container">
               <MobileRow>
                 <Link to="/samex-login">
                   <BrandName className="m-none">Samex</BrandName>
@@ -37,11 +37,11 @@ class Header extends Component {
           </Wrapper>
         ) : (
           <Wrapper>
-            <div className="container py-xxs">
+            <div className="container">
               <Row>
                 <ColumnOne>
                   <Link to="/samex-login">
-                    <BrandName className="m-none">Samex</BrandName>
+                    <BrandName>Samex</BrandName>
                   </Link>
                 </ColumnOne>
                 <ColumnTwo>
@@ -114,6 +114,7 @@ const ColumnTwo = styled.div`
 
 const BrandName = styled.h1`
   color: white !important;
+  margin: none;
 `;
 
 export default withRouter(Header);

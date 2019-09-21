@@ -6,7 +6,7 @@
 
   switch($requestMethod) {
     case 'GET':
-      $api->insertUser($_GET);
+      $api->getUser($_GET);
       break;
     default:
       header("HTTP/1.0 405 Method Not Allowed");

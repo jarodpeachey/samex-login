@@ -159,7 +159,7 @@ class Signup extends Component {
               {mainMessage}
             </Message>
           ) : null}
-          <Heading className="mb-sm">Log In</Heading>
+          <Heading>Log In</Heading>
           <form onSubmit={this.onFormSubmit}>
             <TextField
               // id="email"
@@ -191,11 +191,11 @@ class Signup extends Component {
               Login
             </Button>
           </form>
-          <div className="mt-xs">
+          <SubLink>
             Don't have an account?
             {' '}
             <Link to="/samex-login/signup">Signup</Link>
-          </div>
+          </SubLink>
         </FormWrapper>
       </div>
     );
@@ -235,9 +235,8 @@ const Message = styled.div`
   background: ${props => (props.main ? (props.error ? '#ffa199' : '#84c887') : null)};
 `;
 
-const ErrorList = styled.ul`
-  margin-top: 12px;
-  margin-left: ${({ theme }) => theme.spacing.md};
+const SubLink = styled.div`
+  margin-top: 4px;
 `;
 
 export default withStyles(styles)(Signup);

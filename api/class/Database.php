@@ -1,4 +1,5 @@
 <?php
+  session_start();
   class Database {
     private $host  = 'localhost';
     private $user  = 'root';
@@ -6,6 +7,7 @@
     private $database  = "samex_login";      
     private $table = 'users';
     private $dbConnect = false;
+    private $loggedInUser;
 
     public function __construct(){
       if(!$this->dbConnect){ 
@@ -66,51 +68,29 @@
       if ($response) {
         if($response->num_rows > 0) {
           while ($row = $response->fetch_assoc()) {
-            if (password_verify($userPassword, $row['hashpassword'])) {
+            if (password_verify("$userPassword", $row['hashpassword'])) {
               // Passwords match
-              echo json_encode(["match" => true]);
+              $_SESSION['loggedInUser'] = [
+                "name" => $row['username'],
+                "email" => $row['email']
+              ];
+              echo json_encode(["match" => true, "user" => $this->loggedInUser]);
             } else {
-              echo json_encode(["match" => false]);
+              echo json_encode(["match" => false, "other" => "Password does not match"]);
             }
           }
         } else {
-          echo json_encode(["match" => false]);
+          echo json_encode(["match" => false, "other" => "No rows"]);
         }
       } else {
         echo "Cannot login";         
       }
     
       header('Content-Type: application/json');
-      // //Set variables from form
-      // $userEmail = $userData['email'];
-      // $userPassword = $userData['password'];
-
-      // // Check if email exists in db
-      // $checkEmailQuery = "SELECT passwordhash FROM users WHERE email='$userEmail'";
-      // $response = mysqli_query($this->dbConnect, $checkEmailQuery);
-      // printf($response);
-      // if ($response) {
-      //   echo json_encode(["response" => $response]);
-      //   if(mysqli_num_rows($response) > 0) {
-      //     // Email exists - check password
-      //     if (password_verify($userPassword, $response)) {
-      //       // Passwords match
-      //       echo json_encode(["match" => true]);
-      //     } else {
-      //       // Passwords do NOT match
-      //       echo json_encode(["match" => false]);
-      //     }
-      //   } else {
-      //     // Email does not exist - terminate and send response
-      //     echo json_encode(["match" => false, "response" => $response]);
-      //   }
-      // }
-    
-      // header('Content-Type: application/json');
-    }
+    } // End verifyUser
 
     function getUser ($getUserData) {
-
+      echo json_encode($_SESSION['loggedInUser']);
     } // End getUser()
   }
 ?>

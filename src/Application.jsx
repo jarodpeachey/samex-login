@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Main from './components/pages/Main';
 import Signup from './components/pages/Signup';
 import Login from './components/pages/Login';
+import Welcome from './components/pages/Welcome';
 
 class Application extends Component {
   static propTypes = {
@@ -66,6 +67,18 @@ class Application extends Component {
             />
             <Route
               exact
+              path="/welcome"
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Welcome {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
               path="/samex-login"
               render={props => (
                 <>
@@ -96,6 +109,18 @@ class Application extends Component {
                   {<Header {...props} pathname={location.pathname} />}
                   <Wrapper>
                     <Login {...props} />
+                  </Wrapper>
+                </>
+              )}
+            />
+            <Route
+              exact
+              path="/samex-login/welcome"
+              render={props => (
+                <>
+                  {<Header {...props} pathname={location.pathname} />}
+                  <Wrapper>
+                    <Welcome {...props} />
                   </Wrapper>
                 </>
               )}

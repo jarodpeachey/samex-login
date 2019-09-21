@@ -219,7 +219,7 @@ class Signup extends Component {
               {mainMessage}
             </Message>
           ) : null}
-          <Heading className="mb-sm">Sign Up</Heading>
+          <Heading>Sign Up</Heading>
           <form onSubmit={this.onFormSubmit}>
             <TextField
               id="name"
@@ -313,11 +313,11 @@ class Signup extends Component {
               Sign Up
             </Button>
           </form>
-          <div className="mt-xs">
+          <SubLink>
             Already have an account?
             {' '}
             <Link to="/samex-login/login">Login</Link>
-          </div>
+          </SubLink>
         </FormWrapper>
       </div>
     );
@@ -344,6 +344,7 @@ const FormWrapper = styled.div`
 const Heading = styled.h1`
   text-align: center;
   color: ${({ theme }) => theme.colors.main};
+  margin-bottom: 8px;
 `;
 
 const Message = styled.div`
@@ -360,6 +361,10 @@ const Message = styled.div`
 const ErrorList = styled.ul`
   margin-top: 12px;
   margin-left: ${({ theme }) => theme.spacing.md};
+`;
+
+const SubLink = styled.div`
+  margin-top: 4px;
 `;
 
 export default withStyles(styles)(Signup);
