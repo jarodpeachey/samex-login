@@ -29,7 +29,7 @@ class Header extends Component {
           <Wrapper>
             <div className="container py-xxs">
               <MobileRow>
-                <Link to="/">
+                <Link to="/samex-login">
                   <BrandName className="m-none">Samex</BrandName>
                 </Link>
               </MobileRow>
@@ -40,17 +40,17 @@ class Header extends Component {
             <div className="container py-xxs">
               <Row>
                 <ColumnOne>
-                  <Link to="/">
+                  <Link to="/samex-login">
                     <BrandName className="m-none">Samex</BrandName>
                   </Link>
                 </ColumnOne>
                 <ColumnTwo>
                   <CustomMenu className="menu">
                     <CustomMenuItem className="menu-item">
-                      <Link to="/signup">Signup</Link>
+                      <Link to="/samex-login/signup">Signup</Link>
                     </CustomMenuItem>
                     <CustomMenuItem className="menu-item">
-                      <Link to="/login">Login</Link>
+                      <Link to="/samex-login/login">Login</Link>
                     </CustomMenuItem>
                   </CustomMenu>
                 </ColumnTwo>

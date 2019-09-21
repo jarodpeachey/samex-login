@@ -20,7 +20,7 @@ class Main extends Component {
           <SubTitle>Samex is awesome. Sign up today.</SubTitle>
         </div>
         <ButtonContainer>
-          <Link to="/signup">
+          <Link to="/samex-login/signup">
             <Button color="primary" variant="contained" className="mx-none">
               Sign Up
             </Button>

@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import axios from 'axios';
-// import {} from '../../../api/index.php';
-
-console.log('Hostname: ', window.location.hostname);
-console.log('Pathname: ', window.location.pathname);
-console.log('Origin: ', window.location.origin);
-console.log('Host: ', window.location.host);
-console.log('Protocol: ', window.location.protocol);
-console.log('PUBLIC_URL: ', process.env.NODE_ENV);
-
-const nodeEnv = process.env.NODE_ENV;
 
 const REACT_APP_API = 'http://localhost/samex-login/api/users';
 
@@ -37,6 +27,8 @@ class Signup extends Component {
       emailConfirmError: false,
       passwordError: false,
       passwordConfirmError: false,
+      mainMessageType: '',
+      mainMessage: '',
     };
     this.onNameInputChange = this.onNameInputChange.bind(this);
     this.onEmailInputChange = this.onEmailInputChange.bind(this);
@@ -46,6 +38,8 @@ class Signup extends Component {
       this,
     );
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.clearMainError = this.clearMainError.bind(this);
+    this.clearFields = this.clearFields.bind(this);
   }
 
   componentDidMount () {
@@ -54,12 +48,15 @@ class Signup extends Component {
       emailValue: 'Email',
       emailConfirmValue: 'Confirm Email',
       passwordValue: 'Password',
-      confirmValue: 'Confirm Password',
+      passwordConfirmValue: 'Confirm Password',
     });
   }
 
   shouldComponentUpdate (nextState) {
-    if (this.state.nameError !== nextState.nameError) {
+    if (this.state.mainMessage !== nextState.mainMessage) {
+      return true;
+    }
+    if (this.state.mainMessageError !== nextState.mainMessageError) {
       return true;
     }
     return false;
@@ -75,6 +72,8 @@ class Signup extends Component {
     } else {
       this.setState({ nameError: false });
     }
+
+    this.clearMainError();
   }
 
   onEmailInputChange (e) {
@@ -89,6 +88,8 @@ class Signup extends Component {
     } else {
       this.setState({ emailError: false });
     }
+
+    this.clearMainError();
   }
 
   onEmailConfirmInputChange (e) {
@@ -104,6 +105,8 @@ class Signup extends Component {
     } else {
       this.setState({ emailConfirmError: false });
     }
+
+    this.clearMainError();
   }
 
   onPasswordInputChange (e) {
@@ -117,6 +120,8 @@ class Signup extends Component {
     } else {
       this.setState({ passwordError: false });
     }
+
+    this.clearMainError();
   }
 
   onPasswordConfirmInputChange (e) {
@@ -133,6 +138,8 @@ class Signup extends Component {
     } else {
       this.setState({ passwordConfirmError: false });
     }
+
+    this.clearMainError();
   }
 
   onFormSubmit (e) {
@@ -148,9 +155,10 @@ class Signup extends Component {
       this.state.emailValue === '' ||
       this.state.emailConfirmValue === '' ||
       this.state.passwordValue === '' ||
-      this.state.passwordConfirmValue === ''
+      this.state.passwordConfirmValue === '' ||
+      this.state.mainMessageError
     ) {
-      alert('Please use a different email');
+      alert('Please fix all the errors.');
     } else {
       const bodyFormData = new FormData();
       bodyFormData.set('name', this.state.nameValue);
@@ -165,13 +173,30 @@ class Signup extends Component {
         },
         data: bodyFormData,
       })
-        .then((postRes) => {
-          console.log('Sent! Response: ', postRes);
+        .then((res) => {
+          console.log('Sent! Response: ', res);
+          if (res.data.email_used) {
+            this.setState({ mainMessageType: 'error', mainMessage: 'This email is already connected to an account. You can login here.' });
+          } else if (res.data.success) {
+            this.setState({ mainMessageType: 'success', mainMessage: 'Success! You are now registered.' });
+            this.clearFields();
+            this.props.history.push('/samex-login/login');
+          } else {
+            this.setState({ mainMessageType: 'error', mainMessage: 'There was a problem adding you. Please check your internet connection.' });
+          }
         })
         .catch(() => {
           console.log('Error.');
         });
     }
+  }
+
+  clearMainError () {
+    if (this.setState({ mainMessageType: '', mainMessage: '' }));
+  }
+
+  clearFields () {
+    this.setState({ nameValue: '', emailValue: '', emailConfirmValue: '', passwordValue: '', passwordConfirmValue: '' });
   }
 
   render () {
@@ -182,11 +207,18 @@ class Signup extends Component {
       emailConfirmError,
       passwordError,
       passwordConfirmError,
+      mainMessage,
+      mainMessageType,
     } = this.state;
 
     return (
       <div>
         <FormWrapper>
+          {mainMessage !== '' ? (
+            <Message main error={mainMessageType === 'error'}>
+              {mainMessage}
+            </Message>
+          ) : null}
           <Heading className="mb-sm">Sign Up</Heading>
           <form onSubmit={this.onFormSubmit}>
             <TextField
@@ -201,9 +233,9 @@ class Signup extends Component {
               onChange={this.onNameInputChange}
             />
             {nameError ? (
-              <ErrorMessage>
+              <Message error>
                 Please enter a name between 1 and 9 characters
-              </ErrorMessage>
+              </Message>
             ) : null}
             <TextField
               // id="email"
@@ -217,9 +249,9 @@ class Signup extends Component {
               onChange={this.onEmailInputChange}
             />
             {emailError ? (
-              <ErrorMessage>
+              <Message error>
                 Please enter a valid email including the infix @samex
-              </ErrorMessage>
+              </Message>
             ) : null}
             <TextField
               id="email-confirm"
@@ -233,7 +265,7 @@ class Signup extends Component {
               onChange={this.onEmailConfirmInputChange}
             />
             {emailConfirmError ? (
-              <ErrorMessage>Your emails do not match</ErrorMessage>
+              <Message error>Your emails do not match</Message>
             ) : null}
             <TextField
               id="password"
@@ -247,7 +279,7 @@ class Signup extends Component {
               onChange={this.onPasswordInputChange}
             />
             {passwordError ? (
-              <ErrorMessage>
+              <Message error>
                 Your password must:
                 <ErrorList>
                   <li>Contain at least 1 uppercase letter</li>
@@ -255,7 +287,7 @@ class Signup extends Component {
                   <li>End with a $</li>
                   <li>Be between 8 and 16 characters long</li>
                 </ErrorList>
-              </ErrorMessage>
+              </Message>
             ) : null}
             <TextField
               id="password-confirm"
@@ -269,7 +301,7 @@ class Signup extends Component {
               onChange={this.onPasswordConfirmInputChange}
             />
             {passwordConfirmError ? (
-              <ErrorMessage>Your passwords do not match</ErrorMessage>
+              <Message error>Your passwords do not match</Message>
             ) : null}
             <Button
               type="submit"
@@ -284,7 +316,7 @@ class Signup extends Component {
           <div className="mt-xs">
             Already have an account?
             {' '}
-            <Link to="/login">Login</Link>
+            <Link to="/samex-login/login">Login</Link>
           </div>
         </FormWrapper>
       </div>
@@ -314,13 +346,15 @@ const Heading = styled.h1`
   color: ${({ theme }) => theme.colors.main};
 `;
 
-const ErrorMessage = styled.div`
+const Message = styled.div`
   width: 100%;
-  color: #ff6327;
+  color: ${props => (props.error ? '#ff6327' : 'green')};
   border-radius: 2px;
   border: none;
+  padding: ${props => (props.main ? '12px' : null)};
   font-size: 14px;
   margin: -8px 0 ${({ theme }) => theme.spacing.sm} 0;
+  background: ${props => (props.main ? props.error ? '#ffa199' : '#84c887' : null)}
 `;
 
 const ErrorList = styled.ul`
