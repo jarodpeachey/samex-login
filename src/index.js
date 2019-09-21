@@ -2,12 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
-// import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
-// import { PersistGate } from 'redux-persist/lib/integration/react';
 import Application from './Application';
-// import { persistor, store } from './Store';
 
+// Create history object for React
 const history = createBrowserHistory({
   basename: process.env.PUBLIC_URL,
 });

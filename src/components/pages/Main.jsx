@@ -54,6 +54,7 @@ const SubTitle = styled.h4`
   color: #333;
   text-align: center;
   line-height: 2rem;
+  font-size: 1.2rem;
   font-family: raleway;
   font-weight: normal;
 `;

@@ -21,18 +21,8 @@ const overrides = {
   },
 };
 
-const breakpoints = {
-  keys: ['sm', 'md', 'lg', 'xl'],
-  values: {
-    sm: '540px',
-    md: '769px',
-    lg: '1024px',
-    xl: '1220px',
-  },
-};
-
+// Define theme for Material-UI compnents
 const theme = createMuiTheme({
-  spacing: 4,
   palette: {
     secondary: {
       main: '#F5A623',
@@ -47,7 +37,6 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
   },
-  breakpoints,
   overrides,
   typography: {
     useNextVariants: true,

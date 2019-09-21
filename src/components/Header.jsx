@@ -25,7 +25,7 @@ class Header extends Component {
   render () {
     return (
       <span>
-        {location.pathname === '/signup' ? (
+        {location.pathname === '/samex-login/welcome' ? (
           <Wrapper>
             <div className="container">
               <MobileRow>

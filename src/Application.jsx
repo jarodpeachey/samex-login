@@ -22,61 +22,11 @@ class Application extends Component {
     this.state = {};
   }
 
-  componentDidMount () {}
-
   render () {
     return (
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={styledTheme}>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <>
-                  {<Header {...props} pathname={location.pathname} />}
-                  <Wrapper>
-                    <Main {...props} />
-                  </Wrapper>
-                </>
-              )}
-            />
-            <Route
-              exact
-              path="/signup"
-              render={props => (
-                <>
-                  {<Header {...props} pathname={location.pathname} />}
-                  <Wrapper>
-                    <Signup {...props} />
-                  </Wrapper>
-                </>
-              )}
-            />
-            <Route
-              exact
-              path="/login"
-              render={props => (
-                <>
-                  {<Header {...props} pathname={location.pathname} />}
-                  <Wrapper>
-                    <Login {...props} />
-                  </Wrapper>
-                </>
-              )}
-            />
-            <Route
-              exact
-              path="/welcome"
-              render={props => (
-                <>
-                  {<Header {...props} pathname={location.pathname} />}
-                  <Wrapper>
-                    <Welcome {...props} />
-                  </Wrapper>
-                </>
-              )}
-            />
             <Route
               exact
               path="/samex-login"

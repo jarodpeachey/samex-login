@@ -56,29 +56,14 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Title = styled.h1`
+const Title = styled.h3`
   text-align: center;
   font-weight: bold;
   font-family: raleway;
-  font-size: 2.8rem;
+  font-size: 1.8rem;
   color: #333;
   margin-bottom: ${({ theme }) => theme.spacing.md};
   letter-spacing: 4px;
-`;
-
-const SubTitle = styled.h4`
-  color: #333;
-  text-align: center;
-  line-height: 2rem;
-  font-family: raleway;
-  font-weight: normal;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
 `;
 
 export default withRouter(Welcome);

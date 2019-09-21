@@ -1,11 +1,11 @@
-/* LAYOUT AND GRID SYSTEM
---------------------------------------------------------------- */
-
 *::before,
 *::after,
 * {
   box-sizing: inherit;
 }
+
+/* Custom styles to Material-UI inputs 
+----------------------------------------------------------------*/
 
 .MuiOutlinedInput-notchedOutline  {
   border-color: transparent !important;
@@ -20,6 +20,9 @@
 form .Mui-error fieldset.MuiOutlinedInput-notchedOutline {
   border-color: #FF6347 !important;
 }
+
+/* Default styling to body, html, etc;
+----------------------------------------------------------------*/
 
 body {
   width: 100%;
@@ -43,6 +46,9 @@ body {
 #app {
   height: 100% !important;
 }
+
+/* Container styles
+----------------------------------------------------------------*/
 
 .container {
   margin: 0 auto;
