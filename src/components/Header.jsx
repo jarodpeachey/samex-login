@@ -30,7 +30,7 @@ class Header extends Component {
             <div className="container">
               <MobileRow>
                 <Link to="/samex-login">
-                  <BrandName className="m-none">Samex</BrandName>
+                  <BrandName>Samex</BrandName>
                 </Link>
               </MobileRow>
             </div>
@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.primary} !important;
   color: white !important;
   width: 100%;
-  padding: 0;
+  padding: 16px 0;
   box-shadow: 0 20px 40px -25px #666;
   z-index: 999 !important;
 `;
@@ -114,7 +114,7 @@ const ColumnTwo = styled.div`
 
 const BrandName = styled.h1`
   color: white !important;
-  margin: none;
+  margin: 0 !important;
 `;
 
 export default withRouter(Header);
