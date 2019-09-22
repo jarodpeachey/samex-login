@@ -42,17 +42,10 @@ class Signup extends Component {
     this.clearFields = this.clearFields.bind(this);
   }
 
-  componentDidMount () {
-    this.setState({
-      nameValue: 'Name',
-      emailValue: 'Email',
-      emailConfirmValue: 'Confirm Email',
-      passwordValue: 'Password',
-      passwordConfirmValue: 'Confirm Password',
-    });
-  }
-
   shouldComponentUpdate (nextState) {
+    if (this.state.mainMessage !== nextState.mainMessage) {
+      return true;
+    }
     if (this.state.mainMessage !== nextState.mainMessage) {
       return true;
     }
@@ -158,7 +151,10 @@ class Signup extends Component {
       this.state.passwordConfirmValue === '' ||
       this.state.mainMessageError
     ) {
-      alert('Please fix all the errors.');
+      this.setState({
+        mainMessageType: 'error',
+        mainMessage: 'Please fix all the errors',
+      });
     } else {
       const bodyFormData = new FormData();
       bodyFormData.set('name', this.state.nameValue);
@@ -176,13 +172,28 @@ class Signup extends Component {
         .then((res) => {
           console.log('Sent! Response: ', res);
           if (res.data.email_used) {
-            this.setState({ mainMessageType: 'error', mainMessage: 'This email is already connected to an account. You can login here.' });
+            this.setState({
+              mainMessageType: 'error',
+              mainMessage: (
+                <span>
+                  This email is already connected to an account. You can log in
+                  {' '}
+                  <Link to="/samex-login/login">here.</Link>
+                </span>
+              ),
+            });
           } else if (res.data.success) {
-            this.setState({ mainMessageType: 'success', mainMessage: 'Success! You are now registered.' });
+            this.setState({
+              mainMessageType: 'success',
+              mainMessage: 'Success! You are now registered.',
+            });
             this.clearFields();
             this.props.history.push('/samex-login/login');
           } else {
-            this.setState({ mainMessageType: 'error', mainMessage: 'There was a problem adding you. Please check your internet connection.' });
+            this.setState({
+              mainMessageType: 'error',
+              mainMessage: 'There was a problem adding you. Please try again',
+            });
           }
         })
         .catch(() => {
@@ -196,7 +207,13 @@ class Signup extends Component {
   }
 
   clearFields () {
-    this.setState({ nameValue: '', emailValue: '', emailConfirmValue: '', passwordValue: '', passwordConfirmValue: '' });
+    this.setState({
+      nameValue: '',
+      emailValue: '',
+      emailConfirmValue: '',
+      passwordValue: '',
+      passwordConfirmValue: '',
+    });
   }
 
   render () {
@@ -212,7 +229,7 @@ class Signup extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="container">
         <FormWrapper>
           {mainMessage !== '' ? (
             <Message main error={mainMessageType === 'error'}>
@@ -333,7 +350,7 @@ const styles = () => ({
 });
 
 const FormWrapper = styled.div`
-  width: 65%;
+  max-width: 769px;
   margin: 0 auto;
   max-width: 540px;
   margin-top: ${({ theme }) => theme.spacing.md};
@@ -349,13 +366,13 @@ const Heading = styled.h1`
 
 const Message = styled.div`
   width: 100%;
-  color: ${props => (props.error ? '#ff6327' : 'green')};
+  color: ${props => (props.main ? 'white' : '#f66359')};
   border-radius: 2px;
   border: none;
   padding: ${props => (props.main ? '12px' : null)};
   font-size: 14px;
   margin: -8px 0 ${({ theme }) => theme.spacing.sm} 0;
-  background: ${props => (props.main ? props.error ? '#ffa199' : '#84c887' : null)}
+  background: ${props => (props.main ? (props.error ? '#f66359' : '#6abd6d') : null)};
 `;
 
 const ErrorList = styled.ul`

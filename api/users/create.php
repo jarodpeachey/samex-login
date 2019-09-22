@@ -12,7 +12,7 @@
   switch($requestMethod) {
     case 'POST':
       // Call the insert user method
-      $api->insertUser($_POST);
+      $api->createUser($_POST);
       break;
     default:
       // Send request header as Method Not Allowed

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -152,7 +153,7 @@ class Signup extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="container">
         <FormWrapper>
           {mainMessage !== '' ? (
             <Message main error={mainMessageType === 'error'}>
@@ -192,7 +193,9 @@ class Signup extends Component {
             </Button>
           </form>
           <SubLink>
-            Don't have an account?
+            Don
+            {"'"}
+            t have an account?
             {' '}
             <Link to="/samex-login/signup">Signup</Link>
           </SubLink>
@@ -211,7 +214,7 @@ const styles = () => ({
 });
 
 const FormWrapper = styled.div`
-  width: 65%;
+  max-width: 769px;
   margin: 0 auto;
   max-width: 540px;
   margin-top: ${({ theme }) => theme.spacing.md};
@@ -226,13 +229,13 @@ const Heading = styled.h1`
 
 const Message = styled.div`
   width: 100%;
-  color: ${props => (props.error ? '#ff6327' : 'green')};
+  color: white;
   border-radius: 2px;
   border: none;
   padding: ${props => (props.main ? '12px' : null)};
   font-size: 14px;
   margin: -8px 0 ${({ theme }) => theme.spacing.sm} 0;
-  background: ${props => (props.main ? (props.error ? '#ffa199' : '#84c887') : null)};
+  background: ${props => (props.main ? props.error ? '#f66359' : '#6abd6d' : null)}
 `;
 
 const SubLink = styled.div`

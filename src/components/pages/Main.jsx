@@ -15,13 +15,13 @@ class Main extends Component {
   render () {
     return (
       <Wrapper>
-        <div className="container py-none">
+        <div className="container">
           <Title>Samex</Title>
           <SubTitle>Samex is awesome. Sign up today.</SubTitle>
         </div>
         <ButtonContainer>
           <Link to="/samex-login/signup">
-            <Button color="primary" variant="contained" className="mx-none">
+            <Button color="primary" variant="contained">
               Sign Up
             </Button>
           </Link>
