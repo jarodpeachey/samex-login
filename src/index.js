@@ -13,7 +13,7 @@ const history = createBrowserHistory({
 console.log(process.env.PUBLIC_URL);
 console.log(process.env.NODE_ENV);
 
-const baseURL = process.env.NODE_ENV === 'development' ? '/' : '/samex-login/';
+const baseURL = process.env.NODE_ENV === 'development' ? '/' : '/';
 
 const renderApp = () => {
   ReactDOM.render(
