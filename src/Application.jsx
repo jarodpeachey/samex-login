@@ -23,54 +23,55 @@ class Application extends Component {
   }
 
   render () {
+    console.log(this.props.basename);
     return (
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={styledTheme}>
           <Switch>
             <Route
               exact
-              path="/samex-login"
+              path={this.props.basename}
               render={props => (
                 <>
-                  {<Header {...props} pathname={location.pathname} />}
+                  {<Header {...props} basename={this.props.basename} pathname={location.pathname} />}
                   <Wrapper>
-                    <Main {...props} />
+                    <Main {...props} basename={this.props.basename} />
                   </Wrapper>
                 </>
               )}
             />
             <Route
               exact
-              path="/samex-login/signup"
+              path={`${this.props.basename}signup`}
               render={props => (
                 <>
-                  {<Header {...props} pathname={location.pathname} />}
+                  {<Header {...props} basename={this.props.basename} pathname={location.pathname} />}
                   <Wrapper>
-                    <Signup {...props} />
+                    <Signup {...props} basename={this.props.basename} />
                   </Wrapper>
                 </>
               )}
             />
             <Route
               exact
-              path="/samex-login/login"
+              path={`${this.props.basename}login`}
               render={props => (
                 <>
-                  {<Header {...props} pathname={location.pathname} />}
+                  {<Header {...props} basename={this.props.basename} pathname={location.pathname} />}
                   <Wrapper>
-                    <Login {...props} />
+                    <Login {...props} basename={this.props.basename} />
                   </Wrapper>
                 </>
               )}
             />
             <Route
               exact
-              path="/samex-login/welcome"
+              path={`${this.props.basename}welcome`}
               render={props => (
                 <>
-                  {<Header {...props} pathname={location.pathname} />}
+                  {<Header {...props} pathname={location.pathname} basename={this.props.basename} />}
                   <Wrapper>
-                    <Welcome {...props} />
+                    <Welcome {...props} basename={this.props.basename} />
                   </Wrapper>
                 </>
               )}

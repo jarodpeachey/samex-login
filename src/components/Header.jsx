@@ -19,6 +19,9 @@ class Header extends Component {
     if (this.props.pathname !== nextProps.pathname) {
       return true;
     }
+    if (this.props.baseURL !== nextProps.baseURL) {
+      return true;
+    }
     return false;
   }
 
@@ -27,41 +30,45 @@ class Header extends Component {
       <span>
         {location.pathname === '/samex-login/welcome' ? (
           <Wrapper>
-            <div className="container">
+            <Container className="container">
               <MobileRow>
-                <Link to="/samex-login">
+                <Link to={`${this.props.basename}`}>
                   <BrandName>Samex</BrandName>
                 </Link>
               </MobileRow>
-            </div>
+            </Container>
           </Wrapper>
         ) : (
           <Wrapper>
-            <div className="container">
+            <Container className="container">
               <Row>
                 <ColumnOne>
-                  <Link to="/samex-login">
+                  <Link to={`${this.props.basename}`}>
                     <BrandName>Samex</BrandName>
                   </Link>
                 </ColumnOne>
                 <ColumnTwo>
                   <CustomMenu className="menu">
                     <CustomMenuItem className="menu-item">
-                      <Link to="/samex-login/signup">Signup</Link>
+                      <Link to={`${this.props.basename}signup`}>Signup</Link>
                     </CustomMenuItem>
                     <CustomMenuItem className="menu-item">
-                      <Link to="/samex-login/login">Login</Link>
+                      <Link to={`${this.props.basename}login`}>Login</Link>
                     </CustomMenuItem>
                   </CustomMenu>
                 </ColumnTwo>
               </Row>
-            </div>
+            </Container>
           </Wrapper>
         )}
       </span>
     );
   }
 }
+
+const Container = styled.div`
+  padding: 0;
+`;
 
 const CustomMenu = styled.ul`
   list-style: none;

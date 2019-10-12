@@ -197,7 +197,7 @@ class Signup extends Component {
             {"'"}
             t have an account?
             {' '}
-            <Link to="/samex-login/signup">Signup</Link>
+            <Link to={`${this.props.basename}signup`}>Signup</Link>
           </SubLink>
         </FormWrapper>
       </div>

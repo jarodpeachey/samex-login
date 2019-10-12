@@ -179,7 +179,7 @@ class Signup extends Component {
                 <span>
                   This email is already connected to an account. You can log in
                   {' '}
-                  <Link to="/samex-login/login">here.</Link>
+                  <Link to={`${this.props.basename}login`}>here.</Link>
                 </span>
               ),
             });
@@ -334,7 +334,7 @@ class Signup extends Component {
           <SubLink>
             Already have an account?
             {' '}
-            <Link to="/samex-login/login">Login</Link>
+            <Link to={`${this.props.basename}login`}>Login</Link>
           </SubLink>
         </FormWrapper>
       </div>

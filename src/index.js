@@ -10,11 +10,16 @@ const history = createBrowserHistory({
   basename: process.env.PUBLIC_URL,
 });
 
+console.log(process.env.PUBLIC_URL);
+console.log(process.env.NODE_ENV);
+
+const baseURL = process.env.NODE_ENV === 'development' ? '/' : '/samex-login/';
+
 const renderApp = () => {
   ReactDOM.render(
     <>
-      <Router history={history} basename={process.env.PUBLIC_URL}>
-        <Route render={props => <Application {...props} />} />
+      <Router history={history} basename={baseURL}>
+        <Route render={props => <Application basename={baseURL} {...props} />} />
       </Router>
     </>,
     document.getElementById('app'),
