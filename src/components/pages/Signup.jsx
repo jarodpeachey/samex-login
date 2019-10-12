@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
 import axios from 'axios';
 
-const REACT_APP_API = 'http://localhost/samex-login/api/users';
+// const REACT_APP_API = 'http://localhost/samex-login/api/users';
 
 class Signup extends Component {
   static propTypes = {
@@ -164,7 +164,7 @@ class Signup extends Component {
 
       axios({
         method: 'POST',
-        url: `${REACT_APP_API}/create.php`,
+        url: `${this.props.basename}api/users/create.php`,
         config: {
           headers: { 'Content-Type': 'multipart/form-data' },
         },

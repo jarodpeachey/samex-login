@@ -17,7 +17,7 @@ class Welcome extends Component {
   componentDidMount () {
     axios({
       method: 'get',
-      url: 'http://localhost/samex-login/api/users/get.php',
+      url: `${this.props.basename}api/users/get.php`,
     })
       .then((res) => {
         console.log(res);
