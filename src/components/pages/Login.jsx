@@ -94,7 +94,7 @@ class Signup extends Component {
       this.state.passwordValue === '' ||
       this.state.mainMessageError
     ) {
-      alert('Please fill in all the fields.');
+      alert('Please fill in all the fields');
     } else {
       const bodyFormData = new FormData();
       bodyFormData.set('email', this.state.emailValue);
